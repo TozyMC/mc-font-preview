@@ -1,11 +1,9 @@
 package xyz.tozymc.mcfontpreview;
 
-public class Main {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import javax.swing.SwingUtilities;
 
-    public static void main(String[] args) {
-        System.out.println(new Main().getGreeting());
-    }
+public class Main {
+  public static void main(String[] args) {
+    SwingUtilities.invokeLater(Boostrap::new);
+  }
 }
