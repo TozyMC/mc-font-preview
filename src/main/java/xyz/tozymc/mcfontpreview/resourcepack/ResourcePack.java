@@ -1,29 +1,20 @@
 package xyz.tozymc.mcfontpreview.resourcepack;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.Map;
-import javax.imageio.ImageIO;
 
 public class ResourcePack {
-  private final Map<String, File> fontImageFiles;
+  private final Map<String, BufferedImage> fontImageFiles;
 
-  public ResourcePack(Map<String, File> fontImageFiles) {this.fontImageFiles = fontImageFiles;}
-
-  public BufferedImage getImage(String name) {
-    if (fontImageFiles.containsKey(name)) {
-      try {
-        return ImageIO.read(fontImageFiles.get(name));
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
-
-    return null;
+  public ResourcePack(Map<String, BufferedImage> fontImageFiles) {
+    this.fontImageFiles = fontImageFiles;
   }
 
-  public Map<String, File> getFontImageFiles() {
+  public BufferedImage getImage(String name) {
+    return fontImageFiles.getOrDefault(name, null);
+  }
+
+  public Map<String, BufferedImage> getFontImageFiles() {
     return fontImageFiles;
   }
 }

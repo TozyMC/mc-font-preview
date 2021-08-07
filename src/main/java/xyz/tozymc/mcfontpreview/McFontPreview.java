@@ -6,7 +6,6 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -38,11 +37,7 @@ public final class McFontPreview {
     fontFilesComboBox = new JComboBox<>();
     fontFilesComboBox.setSize(COMBO_BOX_SIZE);
     fontFilesComboBox.addActionListener(new RenderImageAction());
-    resourcePack.getFontImageFiles()
-        .values()
-        .stream()
-        .map(File::getName)
-        .forEach(fontFilesComboBox::addItem);
+    resourcePack.getFontImageFiles().keySet().forEach(fontFilesComboBox::addItem);
 
     fontPreviewPanel = new JPanel(new GridLayout(ROW, COLUMN, SPACING, SPACING));
     fontPreviewPanel.setMinimumSize(FONT_PREVIEW_PANEL_MINIMUM_SIZE);
