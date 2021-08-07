@@ -2,6 +2,13 @@ plugins {
   id 'application'
 }
 
+group = 'xyz.tozymc'
+version = '1.0-development'
+description = 'Minecraft resource pack font preview.'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 repositories {
   mavenCentral()
 }
@@ -14,6 +21,10 @@ dependencies {
 
 application {
   mainClass = 'xyz.tozymc.mcfontpreview.Main'
+}
+
+tasks.named("compileJava") {
+  options.encoding = 'UTF-8'
 }
 
 tasks.named('test') {
