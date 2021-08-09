@@ -26,9 +26,8 @@ import xyz.tozymc.mcfontpreview.layout.SingleComponentAspectRatioKeeperLayout;
 
 public class Boostrap extends JFrame {
   private static final String TITLE = "Minecraft Font Preview";
-  // FIXME: Need to change min size
-  private static final int MIN_WIDTH = 100;
-  private static final int MIN_HEIGHT = 100;
+  private static final int MIN_WIDTH = 390;
+  private static final int MIN_HEIGHT = 460;
 
   private static final Dimension PREVIEW_PANEL_MINIMUM_SIZE = new Dimension(270, 270);
   private static final Dimension MINIMUM_SIZE = new Dimension(MIN_WIDTH, MIN_HEIGHT);
@@ -62,7 +61,6 @@ public class Boostrap extends JFrame {
     fontFilesComboBox.setRenderer(new FontFileComboBoxRenderer());
     fontFilesComboBox.setMaximumSize(COMBO_BOX_SIZE);
     fontFilesComboBox.setPreferredSize(COMBO_BOX_SIZE);
-
   }
 
   private void initialPreviewPanel() {
