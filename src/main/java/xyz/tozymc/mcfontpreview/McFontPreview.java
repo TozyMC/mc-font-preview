@@ -1,6 +1,5 @@
 package xyz.tozymc.mcfontpreview;
 
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -21,26 +20,24 @@ public final class McFontPreview {
 
   public static final ImageSplitter imageSplitter = new ImageSplitterImpl();
 
-  private static final Dimension COMBO_BOX_SIZE = new Dimension(100, 50);
-  private static final Dimension FONT_PREVIEW_PANEL_MINIMUM_SIZE = new Dimension(270, 270);
-
   private final ResourcePack resourcePack;
   private JComboBox<String> fontFilesComboBox;
   private JPanel fontPreviewPanel;
 
-  public McFontPreview(ResourcePack resourcePack) {
+  McFontPreview(ResourcePack resourcePack) {
     this.resourcePack = resourcePack;
-    initialComponents();
   }
 
-  private void initialComponents() {
-    fontFilesComboBox = new JComboBox<>();
-    fontFilesComboBox.setSize(COMBO_BOX_SIZE);
-    fontFilesComboBox.addActionListener(new RenderImageAction());
-    resourcePack.getFontImageFiles().keySet().forEach(fontFilesComboBox::addItem);
+  public void registerFontFilesComboBox(JComboBox<String> fontFilesComboBox) {
+    this.fontFilesComboBox = fontFilesComboBox;
+    this.fontFilesComboBox.removeAllItems();
+    this.fontFilesComboBox.addActionListener(new RenderImageAction());
+    resourcePack.getFontImageFiles().keySet().forEach(this.fontFilesComboBox::addItem);
+  }
 
-    fontPreviewPanel = new JPanel(new GridLayout(ROW, COLUMN, SPACING, SPACING));
-    fontPreviewPanel.setMinimumSize(FONT_PREVIEW_PANEL_MINIMUM_SIZE);
+  public void registerPreviewPanel(JPanel fontPreviewPanel) {
+    this.fontPreviewPanel = fontPreviewPanel;
+    this.fontPreviewPanel.setLayout(new GridLayout(ROW, COLUMN, SPACING, SPACING));
   }
 
   public JComboBox<String> getComboBox() {
@@ -58,6 +55,9 @@ public final class McFontPreview {
   class RenderImageAction implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
+      if (fontPreviewPanel == null) {
+        return;
+      }
       fontPreviewPanel.removeAll();
 
       String fileName = fontFilesComboBox.getItemAt(fontFilesComboBox.getSelectedIndex());
