@@ -18,6 +18,6 @@ jobs:
         uses: gradle/gradle-build-action@v1
         with:
           arguments: build
-          distributions-cache-enabled: true
+          wrapper-cache-enabled: true
           dependencies-cache-enabled: true
           configuration-cache-enabled: true
