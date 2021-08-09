@@ -23,6 +23,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListCellRenderer;
 import javax.swing.border.EmptyBorder;
 import xyz.tozymc.mcfontpreview.layout.SingleComponentAspectRatioKeeperLayout;
+import xyz.tozymc.mcfontpreview.resourcepack.ResourcePack;
 
 public class Boostrap extends JFrame {
   private static final String TITLE = "Minecraft Font Preview";
@@ -132,6 +133,9 @@ public class Boostrap extends JFrame {
         return;
       }
       File file = resourcePackChooser.getSelectedFile();
+      McFontPreview mcFontPreview = new McFontPreview(ResourcePack.loadFromFile(file));
+      mcFontPreview.registerPreviewPanel(previewPanel);
+      mcFontPreview.registerFontFilesComboBox(fontFilesComboBox);
     }
   }
 
