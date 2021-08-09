@@ -32,7 +32,7 @@ public class SingleComponentAspectRatioKeeperLayout implements LayoutManager {
 
   @Override
   public Dimension minimumLayoutSize(Container parent) {
-    return preferredLayoutSize(parent);
+    return getSingleComponent(parent).getMinimumSize();
   }
 
   @Override
