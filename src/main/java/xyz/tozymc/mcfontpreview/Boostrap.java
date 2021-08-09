@@ -1,6 +1,7 @@
 package xyz.tozymc.mcfontpreview;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.HeadlessException;
@@ -16,8 +17,10 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ListCellRenderer;
 import javax.swing.border.EmptyBorder;
 import xyz.tozymc.mcfontpreview.layout.SingleComponentAspectRatioKeeperLayout;
 
@@ -26,8 +29,6 @@ public class Boostrap extends JFrame {
   // FIXME: Need to change min size
   private static final int MIN_WIDTH = 100;
   private static final int MIN_HEIGHT = 100;
-  // TODO: Add non-selectable title
-  private static final String NON_SELECTABLE_ITEM = "Select your font image...";
 
   private static final Dimension PREVIEW_PANEL_MINIMUM_SIZE = new Dimension(270, 270);
   private static final Dimension MINIMUM_SIZE = new Dimension(MIN_WIDTH, MIN_HEIGHT);
@@ -58,6 +59,7 @@ public class Boostrap extends JFrame {
 
   private void initialFontFilesComboBox() {
     fontFilesComboBox = new JComboBox<>();
+    fontFilesComboBox.setRenderer(new FontFileComboBoxRenderer());
     fontFilesComboBox.setMaximumSize(COMBO_BOX_SIZE);
     fontFilesComboBox.setPreferredSize(COMBO_BOX_SIZE);
 
@@ -114,6 +116,17 @@ public class Boostrap extends JFrame {
     getContentPane().setLayout(layout);
   }
 
+  private static class FontFileComboBoxRenderer extends JLabel implements ListCellRenderer<String> {
+    private static final String NON_SELECTABLE_ITEM = "Select your font image...";
+
+    @Override
+    public Component getListCellRendererComponent(JList<? extends String> list, String value,
+        int index, boolean isSelected, boolean cellHasFocus) {
+      setText(index == -1 && value == null ? NON_SELECTABLE_ITEM : value);
+      return this;
+    }
+  }
+
   private class ResourcePackChoiceListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -123,4 +136,5 @@ public class Boostrap extends JFrame {
       File file = resourcePackChooser.getSelectedFile();
     }
   }
+
 }
