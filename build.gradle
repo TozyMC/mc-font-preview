@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'xyz.tozymc'
-version = '1.0-development'
+version = '1.0-alpha'
 description = 'Minecraft resource pack font preview.'
 
 sourceCompatibility = 1.8
