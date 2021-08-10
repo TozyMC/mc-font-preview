@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'xyz.tozymc'
-version = '1.0-development'
+version = '1.0-alpha'
 description = 'Minecraft resource pack font preview.'
 
 sourceCompatibility = 1.8
@@ -17,7 +17,6 @@ dependencies {
   testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
 
   implementation 'com.google.guava:guava:30.1.1-jre'
-  implementation 'net.lingala.zip4j:zip4j:2.9.0'
 }
 
 application {
