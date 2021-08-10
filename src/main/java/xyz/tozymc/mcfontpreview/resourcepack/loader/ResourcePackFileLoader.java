@@ -2,7 +2,6 @@ package xyz.tozymc.mcfontpreview.resourcepack.loader;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
-import com.google.common.io.Files;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FilenameFilter;
@@ -32,9 +31,7 @@ public abstract class ResourcePackFileLoader implements ResourcePackLoader {
 
   public static ResourcePackLoader createLoader(File file) {
     Preconditions.checkNotNull(file, "File cannot be null");
-    //noinspection UnstableApiUsage
-    String extension = Files.getFileExtension(file.getName());
-    if (extension.equalsIgnoreCase(ZIP_EXTENSION)) {
+    if (file.getName().endsWith(ZIP_EXTENSION)) {
       return new ResourcePackZipLoader(file);
     }
     return new ResourcePackFolderLoader(file);

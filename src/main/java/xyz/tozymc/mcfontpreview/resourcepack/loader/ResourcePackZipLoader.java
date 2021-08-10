@@ -5,8 +5,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import net.lingala.zip4j.ZipFile;
-import net.lingala.zip4j.exception.ZipException;
+import java.util.UUID;
+import xyz.tozymc.mcfontpreview.util.Archives;
 
 public class ResourcePackZipLoader extends ResourcePackFileLoader {
   protected ResourcePackZipLoader(File file) {
@@ -16,19 +16,14 @@ public class ResourcePackZipLoader extends ResourcePackFileLoader {
   @Override
   protected File loadFile() {
     Path tempDir = Preconditions.checkNotNull(createTempDir());
-    File file = tempDir.toFile();
-    ZipFile zipFile = new ZipFile(this.file);
-    try {
-      zipFile.extractAll(file.getAbsolutePath());
-    } catch (ZipException e) {
-      e.printStackTrace();
-    }
-    return file;
+    File target = tempDir.toFile();
+    Archives.unzip(this.file, target);
+    return target;
   }
 
   private Path createTempDir() {
     try {
-      return Files.createTempDirectory(file.getName() + "-" + System.currentTimeMillis());
+      return Files.createTempDirectory(file.getName() + "-" + UUID.randomUUID());
     } catch (IOException e) {
       e.printStackTrace();
     }
